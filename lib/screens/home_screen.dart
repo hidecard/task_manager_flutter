@@ -17,18 +17,20 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _refreshTasks() async {
-    tasks = await DatabaseHelper.instance.getTasks();
-    setState(() {});
+    tasks = await DatabaseHelper.getTasks();
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   void _toggleComplete(Task task) async {
     task.isCompleted = task.isCompleted == 0 ? 1 : 0;
-    await DatabaseHelper.instance.updateTask(task);
+    await DatabaseHelper.updateTask(task);
     _refreshTasks();
   }
 
   void _deleteTask(int id) async {
-    await DatabaseHelper.instance.deleteTask(id);
+    await DatabaseHelper.deleteTask(id);
     _refreshTasks();
   }
 

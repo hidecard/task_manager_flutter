@@ -26,11 +26,9 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
     final desc = descController.text;
     if (title.isEmpty || desc.isEmpty) return;
     if (widget.task == null) {
-      await DatabaseHelper.instance.insertTask(
-        Task(title: title, description: desc),
-      );
+      await DatabaseHelper.insertTask(Task(title: title, description: desc));
     } else {
-      await DatabaseHelper.instance.updateTask(
+      await DatabaseHelper.updateTask(
         Task(
           id: widget.task!.id,
           title: title,
